@@ -1,6 +1,7 @@
 import Fastify from "fastify";
 import { usersRoutes } from "./http/routes/users-routes";
 import { env } from "./env";
+import { projectsRoutes } from "./http/routes/projects-routes";
 
 const app = Fastify();
 
@@ -21,5 +22,6 @@ app.setErrorHandler((error, _, reply) => {
 });
 
 app.register(usersRoutes);
+app.register(projectsRoutes);
 
 export { app };

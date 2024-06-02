@@ -26,12 +26,12 @@ async function setup() {
   await sql/* sql */ `
     CREATE TABLE IF NOT EXISTS projects (
       id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-      name VARCHAR(255),
+      name VARCHAR(255) NOT NULL UNIQUE,
       html VARCHAR(4000),
       css VARCHAR(4000),
       javascript VARCHAR(4000),
 
-      user_id UUID NOT NULL UNIQUE,
+      user_id UUID NOT NULL,
       FOREIGN KEY (user_id) REFERENCES users(id),
 
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 

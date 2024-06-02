@@ -10,4 +10,5 @@ export type CreateProjectRequest = {
 
 export interface ProjectsRepository {
   create(data: CreateProjectRequest): Promise<Project>;
+  findByName(name: string): Promise<null | Project>;
 }

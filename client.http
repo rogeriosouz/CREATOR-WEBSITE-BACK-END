@@ -16,3 +16,12 @@ content-type: application/json
   "email": "rogerio@gmail.com",
   "password": "123456"
 }
+
+### create project
+POST http://localhost:3333/projects HTTP/1.1
+content-type: application/json
+cookie: authUser=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMjNkODU4Y2QtNWVmMy00ODI0LTgyOTMtOGNmNGU1ODc5MzI5IiwibmFtZSI6InJvZ2VyaW8iLCJlbWFpbCI6InJvZ2VyaW9AZ21haWwuY29tIn0sImlhdCI6MTcxNzM0ODQ1NSwiZXhwIjoxNzE3ODY2ODU1fQ.88C3vbdn4Gwrg-93dNV0Q-Y_4SlMxsStdTujDYB-xAw
+
+{
+  "name": "primeiro projeto"
+}

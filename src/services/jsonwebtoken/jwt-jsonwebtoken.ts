@@ -17,9 +17,9 @@ export class JwtJsonwebtokenService implements JwtService {
 
   async verify({ jwtToken, secret }: VerifyTypeRequest) {
     try {
-      const token = jwt.verify(jwtToken, secret) as { id: string };
+      const token = jwt.verify(jwtToken, secret) as { user: { id: string } };
 
-      return { userId: token.id };
+      return { userId: token.user.id };
     } catch (error) {
       return null;
     }
