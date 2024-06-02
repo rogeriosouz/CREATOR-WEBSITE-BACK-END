@@ -22,6 +22,12 @@ export class InMemoryProjectsRepository implements ProjectsRepository {
     return project;
   }
 
+  async findAllByAuthorId(authorId: string) {
+    const project = this.project.filter((item) => item.user_id === authorId);
+
+    return project || [];
+  }
+
   async findByName(name: string) {
     const project = this.project.find((item) => item.name === name);
 

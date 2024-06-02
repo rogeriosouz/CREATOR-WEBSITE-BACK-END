@@ -20,6 +20,7 @@ export type UpdateProjectData = {
 
 export interface ProjectsRepository {
   create(data: CreateProjectRequest): Promise<Project>;
+  findAllByAuthorId(authorId: string): Promise<Project[]>;
   findByName(name: string): Promise<null | Project>;
   findById(id: string): Promise<null | Project>;
   findByAuthorIdAndProjectId(

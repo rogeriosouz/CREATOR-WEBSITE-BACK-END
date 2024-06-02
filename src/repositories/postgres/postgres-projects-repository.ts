@@ -15,6 +15,13 @@ export class PostgresProjectsRepository implements ProjectsRepository {
     return project[0] as Project;
   }
 
+  async findAllByAuthorId(authorId: string) {
+    const projects =
+      (await sql/* sql */ `SELECT id, name FROM projects WHERE user_id = ${authorId}`) as Project[];
+
+    return projects;
+  }
+
   async findByName(name: string) {
     const project =
       await sql/* sql */ `SELECT * FROM projects WHERE name = ${name}`;
