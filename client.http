@@ -25,3 +25,14 @@ cookie: authUser=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMjNkOD
 {
   "name": "primeiro projeto"
 }
+
+
+### update project
+PUT http://localhost:3333/projects/b1e018d9-ef7b-4b8c-bb93-3669e4f90ba6 HTTP/1.1
+content-type: application/json
+cookie: authUser=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMjNkODU4Y2QtNWVmMy00ODI0LTgyOTMtOGNmNGU1ODc5MzI5IiwibmFtZSI6InJvZ2VyaW8iLCJlbWFpbCI6InJvZ2VyaW9AZ21haWwuY29tIn0sImlhdCI6MTcxNzM0ODQ1NSwiZXhwIjoxNzE3ODY2ODU1fQ.88C3vbdn4Gwrg-93dNV0Q-Y_4SlMxsStdTujDYB-xAw
+
+{
+  "html": "<h1>Hello world</h1>",
+  "css": "h1 { color: red; }"
+}

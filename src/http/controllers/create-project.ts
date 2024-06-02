@@ -1,12 +1,11 @@
 import { PostgresUsersRepository } from "@/repositories/postgres/postgres-users-repository";
 import { ProjectAlreadyExistsError } from "@/use-cases/errors/ProjectAlreadyExistsError";
 import { UserNotFoundError } from "@/use-cases/errors/UserNotFoundError";
-import { FastifyReply } from "fastify";
-import { z } from "zod";
-
 import { PostgresProjectsRepository } from "@/repositories/postgres/postgres-projects-repository";
 import { CreateProjectUseCase } from "@/use-cases/create-project";
 import { CustomAuthMiddlewareFastifyRequest } from "../middlewares/auth";
+import { FastifyReply } from "fastify";
+import { z } from "zod";
 
 export async function createProject(
   request: CustomAuthMiddlewareFastifyRequest,
