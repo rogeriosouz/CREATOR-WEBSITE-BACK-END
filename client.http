@@ -1,0 +1,18 @@
+### register
+POST http://localhost:3333/auth/register HTTP/1.1
+content-type: application/json
+
+{
+  "name": "rogerio",
+  "email": "rogerio@gmail.com",
+  "password": "123456"
+}
+
+### authentication
+POST http://localhost:3333/auth/login HTTP/1.1
+content-type: application/json
+
+{
+  "email": "rogerio@gmail.com",
+  "password": "123456"
+}
