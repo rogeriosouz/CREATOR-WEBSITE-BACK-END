@@ -33,4 +33,5 @@ export interface ProjectsRepository {
     projectId: string,
   ): Promise<null | Project>;
   update(id: string, data: UpdateProjectData): Promise<Project>;
+  delete(projectId: string): Promise<void>;
 }

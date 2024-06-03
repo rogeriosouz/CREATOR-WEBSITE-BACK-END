@@ -72,4 +72,8 @@ export class PostgresProjectsRepository implements ProjectsRepository {
 
     return newProject[0] as Project;
   }
+
+  async delete(projectId: string) {
+    await sql/* sql */ `DELETE FROM projects WHERE id = ${projectId}`;
+  }
 }

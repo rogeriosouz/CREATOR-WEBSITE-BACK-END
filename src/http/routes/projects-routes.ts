@@ -4,6 +4,7 @@ import { authMiddleware } from "../middlewares/auth";
 import { updateProject } from "../controllers/update-project";
 import { getProjects } from "../controllers/get-projects";
 import { getProject } from "../controllers/get-project";
+import { deleteProject } from "../controllers/delete-project";
 
 export async function projectsRoutes(app: FastifyInstance) {
   app.get(
@@ -60,5 +61,19 @@ export async function projectsRoutes(app: FastifyInstance) {
       },
     },
     updateProject,
+  );
+
+  app.delete(
+    "/projects/:id",
+    {
+      preHandler: (request, reply) => {
+        return authMiddleware({
+          request,
+          reply,
+          isAdm: false,
+        });
+      },
+    },
+    deleteProject,
   );
 }

@@ -2,17 +2,17 @@ import { PostgresUsersRepository } from "@/repositories/postgres/postgres-users-
 import { UserNotFoundError } from "@/use-cases/errors/UserNotFoundError";
 import { PostgresProjectsRepository } from "@/repositories/postgres/postgres-projects-repository";
 import { CustomAuthMiddlewareFastifyRequest } from "../middlewares/auth";
-import { GetProjectUseCase } from "@/use-cases/get-project";
+import { DeleteProjectUseCase } from "@/use-cases/delete-project";
 import { ResourceNotFoundError } from "@/use-cases/errors/ResourceNotFoundError";
 import { FastifyReply } from "fastify";
 import { z } from "zod";
 
-export async function getProject(
+export async function deleteProject(
   request: CustomAuthMiddlewareFastifyRequest,
   reply: FastifyReply,
 ) {
   const registerSchemaParams = z.object({
-    id: z.string().uuid(),
+    id: z.string().min(3),
   });
 
   const { id } = registerSchemaParams.parse(request.params);
@@ -22,19 +22,19 @@ export async function getProject(
     const usersRepository = new PostgresUsersRepository();
     const projectsRepository = new PostgresProjectsRepository();
 
-    const getProjectUseCase = new GetProjectUseCase(
+    const deleteProjectUseCase = new DeleteProjectUseCase(
       projectsRepository,
       usersRepository,
     );
 
-    const { project } = await getProjectUseCase.execute({
+    await deleteProjectUseCase.execute({
       projectId: id,
       userId,
     });
 
     return reply.status(200).send({
+      message: "success delete project",
       statusCode: 200,
-      project,
     });
   } catch (err) {
     if (err instanceof UserNotFoundError) {
