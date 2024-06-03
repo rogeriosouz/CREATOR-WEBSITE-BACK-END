@@ -1,7 +1,12 @@
 export type Project = {
   id: string;
   name: string;
+  html?: string;
+  css?: string;
+  javascript?: string;
   user_id?: string;
+  create_at?: Date;
+  updated_at?: Date;
 };
 
 export type CreateProjectRequest = {
