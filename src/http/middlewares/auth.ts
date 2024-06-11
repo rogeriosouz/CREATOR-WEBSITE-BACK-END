@@ -20,15 +20,14 @@ export async function authMiddleware({
   reply,
   isAdm,
 }: AuthMiddlewareRequest) {
-  const isCookieToken = request.headers.cookie;
+  const authToken = request.cookies.authUser;
 
-  if (!isCookieToken) {
+  if (!authToken) {
     return reply.status(401).send({
+      statusCode: 401,
       message: "token invalid",
     });
   }
-
-  const authToken = isCookieToken.replace("authUser=", "");
 
   const jwtJsonwebtokenService = new JwtJsonwebtokenService();
 
@@ -38,10 +37,18 @@ export async function authMiddleware({
   });
 
   if (!isTokenValid) {
-    return reply.status(401).send({
-      statusCode: 401,
-      message: "token invalid",
-    });
+    const cookie =
+      "authUser=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; Secure; SameSite=None; HttpOnly";
+
+    return reply
+      .status(401)
+      .headers({
+        "set-cookie": cookie,
+      })
+      .send({
+        statusCode: 401,
+        message: "token invalid",
+      });
   }
 
   const usersRepository = new PostgresUsersRepository();
@@ -66,10 +73,18 @@ export async function authMiddleware({
   );
 
   if (isTokenValidDb) {
-    return reply.status(401).send({
-      statusCode: 401,
-      message: "token invalid",
-    });
+    const cookie =
+      "authUser=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; Secure; SameSite=None; HttpOnly";
+
+    return reply
+      .status(401)
+      .headers({
+        "set-cookie": cookie,
+      })
+      .send({
+        statusCode: 401,
+        message: "token invalid",
+      });
   }
 
   request.userId = isTokenValid.userId;
