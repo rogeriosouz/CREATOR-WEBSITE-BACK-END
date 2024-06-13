@@ -8,8 +8,9 @@ import {
 
 export class PostgresProjectsRepository implements ProjectsRepository {
   async create({ name, authorId }: CreateProjectRequest) {
-    const project = await sql/* sql */ `INSERT INTO projects (name, user_id) 
-    VALUES (${name}, ${authorId}) RETURNING *;
+    const project =
+      await sql/* sql */ `INSERT INTO projects (name, user_id, updated_at) 
+    VALUES (${name}, ${authorId}, NOW()) RETURNING *;
     `;
 
     return project[0] as Project;
@@ -17,7 +18,7 @@ export class PostgresProjectsRepository implements ProjectsRepository {
 
   async findAllByAuthorId(authorId: string) {
     const projects =
-      (await sql/* sql */ `SELECT id, name FROM projects WHERE user_id = ${authorId}`) as Project[];
+      (await sql/* sql */ `SELECT id, name, updated_at FROM projects WHERE user_id = ${authorId} ORDER BY updated_at DESC`) as Project[];
 
     return projects;
   }
@@ -67,7 +68,7 @@ export class PostgresProjectsRepository implements ProjectsRepository {
       : (project[0].javascript as string);
 
     const newProject = await sql/* sql */ `UPDATE projects 
-      SET name = ${name}, html = ${html}, css = ${css}, javascript = ${javascript}, updated_at = DEFAULT 
+      SET name = ${name}, html = ${html}, css = ${css}, javascript = ${javascript}, updated_at = NOW()
       WHERE id = ${id} RETURNING *`;
 
     return newProject[0] as Project;
