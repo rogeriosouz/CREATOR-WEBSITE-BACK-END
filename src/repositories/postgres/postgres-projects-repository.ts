@@ -61,11 +61,13 @@ export class PostgresProjectsRepository implements ProjectsRepository {
       await sql/* sql */ `SELECT * from projects WHERE id = ${id}`;
 
     const name = data.name ? data.name : (project[0].name as string);
-    const html = data.html ? data.html : (project[0].html as string);
-    const css = data.css ? data.css : (project[0].css as string);
-    const javascript = data.javascript
-      ? data.javascript
-      : (project[0].javascript as string);
+    const html =
+      data.html !== undefined ? data.html : (project[0].html as string);
+    const css = data.css !== undefined ? data.css : (project[0].css as string);
+    const javascript =
+      data.javascript !== undefined
+        ? data.javascript
+        : (project[0].javascript as string);
 
     const newProject = await sql/* sql */ `UPDATE projects 
       SET name = ${name}, html = ${html}, css = ${css}, javascript = ${javascript}, updated_at = NOW()
