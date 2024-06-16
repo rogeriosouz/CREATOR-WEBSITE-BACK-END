@@ -19,7 +19,7 @@ async function setup() {
   await sql/* sql */ `
     CREATE TABLE IF NOT EXISTS invalid_tokens (
       id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-      token VARCHAR(255) NOT NULL
+      token VARCHAR(300) NOT NULL
     ) 
   `;
 
@@ -35,7 +35,7 @@ async function setup() {
       FOREIGN KEY (user_id) REFERENCES users(id),
 
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
-      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+      updated_at TEXT
     )
    `;
 
