@@ -4,6 +4,8 @@ import { authentication } from "../controllers/authentication";
 import { logout } from "../controllers/logout";
 import { authMiddleware } from "../middlewares/auth";
 import fastifyRateLimit from "@fastify/rate-limit";
+import { forgotPassword } from "../controllers/forgot-password";
+
 // app.delete(
 //   "/auth/logout",
 //   {
@@ -27,6 +29,7 @@ export async function usersRoutes(app: FastifyInstance) {
 
   app.post("/auth/register", register);
   app.post("/auth/login", authentication);
+  app.post("/auth/forgot-password", forgotPassword);
 
   app.get(
     "/auth/logout",

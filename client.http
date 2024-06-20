@@ -23,6 +23,15 @@ cookie: authUser=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMjNkOD
 content-type: application/json
 
 
+### forgot-password
+POST http://localhost:3333/auth/forgot-password HTTP/1.1
+content-type: application/json
+
+{
+  "email": "rogerio@gmail.com"
+}
+
+
 ### list projects
 GET http://localhost:3333/projects HTTP/1.1
 cookie: authUser=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMjNkODU4Y2QtNWVmMy00ODI0LTgyOTMtOGNmNGU1ODc5MzI5IiwibmFtZSI6InJvZ2VyaW8iLCJlbWFpbCI6InJvZ2VyaW9AZ21haWwuY29tIn0sImlhdCI6MTcxODEzNzgyMiwiZXhwIjoxNzE4NjU2MjIyfQ.Rq_8ipsL_-QEmxATf5AS_RWdeaLJzg-NiX5TmTlFnd8
