@@ -17,10 +17,11 @@ export class JwtJsonwebtokenService implements JwtService {
 
   async verify({ jwtToken, secret }: VerifyTypeRequest) {
     try {
-      const token = jwt.verify(jwtToken, secret) as { userId: string };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const token: any = jwt.verify(jwtToken, secret);
 
       return {
-        userId: token.userId,
+        userId: token.userId ? token.userId : token.user.id,
       };
     } catch (error) {
       return null;

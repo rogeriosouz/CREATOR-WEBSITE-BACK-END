@@ -43,7 +43,7 @@ export class ForgotPasswordUseCase {
       email,
       message: "Clique no butão abaixo, para redefinir sua senha",
       token: jwt,
-      urlApplication: "http://localhost:3000",
+      urlApplication: "http://localhost:5173",
     });
 
     await this.EmailService.sendEmail(email, templateForgotPassword);
