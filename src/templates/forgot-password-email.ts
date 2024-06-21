@@ -148,7 +148,7 @@ export function forgotPasswordEmail({
       <h2 class="title">Olá ${email}</h2>
       <p>${message}</p>
 
-      <a href='${urlApplication}/recovery-password/${token}' class="link">redefinir senha</a>
+      <a href='${urlApplication}/auth/recovery-password/${token}' class="link">redefinir senha</a>
 
       <p class="text-footer">Ignore este e-mail se você não solicitou uma alteração de senha.</p>
     </div>
