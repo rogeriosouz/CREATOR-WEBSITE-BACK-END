@@ -1,34 +1,34 @@
 import { PostgresUsersRepository } from "@/repositories/postgres/postgres-users-repository";
 import { JwtJsonwebtokenService } from "@/services/jsonwebtoken/jwt-jsonwebtoken";
-import { EmailNodemailerService } from "@/services/nodemailer/email-nodemailer";
+import { TokenInvalidError } from "@/use-cases/errors/TokenInvalidError";
 import { UserNotFoundError } from "@/use-cases/errors/UserNotFoundError";
-import { ForgotPasswordUseCase } from "@/use-cases/forgot-password";
+import { RecoveryPasswordUseCase } from "@/use-cases/recovery-password";
 import { FastifyRequest, FastifyReply } from "fastify";
 import { z } from "zod";
 
-export async function forgotPassword(
+export async function recoveryPassword(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  const forgotPasswordSchema = z.object({
-    email: z.string().email(),
+  const recoveryPasswordSchema = z.object({
+    token: z.string(),
+    newPassword: z.string().min(5),
   });
 
-  const { email } = forgotPasswordSchema.parse(request.body);
+  const { token, newPassword } = recoveryPasswordSchema.parse(request.body);
 
   try {
     const usersRepository = new PostgresUsersRepository();
-    const emailService = new EmailNodemailerService();
     const jwtService = new JwtJsonwebtokenService();
 
-    const forgotPasswordUseCase = new ForgotPasswordUseCase(
+    const recoveryPasswordUseCase = new RecoveryPasswordUseCase(
       usersRepository,
-      emailService,
       jwtService,
     );
 
-    const { message } = await forgotPasswordUseCase.execute({
-      email,
+    const { message } = await recoveryPasswordUseCase.execute({
+      token,
+      newPassword,
     });
 
     return {
@@ -39,6 +39,13 @@ export async function forgotPassword(
     if (err instanceof UserNotFoundError) {
       return reply.status(404).send({
         statusCode: 404,
+        message: err.message,
+      });
+    }
+
+    if (err instanceof TokenInvalidError) {
+      return reply.status(401).send({
+        statusCode: 401,
         message: err.message,
       });
     }

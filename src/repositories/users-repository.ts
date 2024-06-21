@@ -19,4 +19,6 @@ export interface UsersRepository {
   findByEmail(email: string): Promise<User | null>;
   findByInvalidToken(token: string): Promise<null | InvalidToken>;
   logOut(token: string): Promise<void>;
+  recoveryPassword(userId: string, newPassword: string): Promise<void>;
+  invalidateToken(token: string): Promise<void>;
 }

@@ -38,4 +38,13 @@ export class PostgresUsersRepository implements UsersRepository {
   async logOut(token: string) {
     await sql/* sql */ `INSERT INTO invalid_tokens (token) VALUES (${token})`;
   }
+
+  async invalidateToken(token: string) {
+    await sql/* sql */ `INSERT INTO invalid_tokens (token) VALUES (${token})`;
+  }
+
+  async recoveryPassword(userId: string, newPassword: string) {
+    await sql/* sql */ `UPDATE users SET password_hash = ${newPassword}
+    WHERE id = ${userId}`;
+  }
 }

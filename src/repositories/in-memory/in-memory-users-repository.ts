@@ -54,4 +54,25 @@ export class InMemoryUsersRepository implements UsersRepository {
       token,
     });
   }
+
+  async invalidateToken(token: string) {
+    this.tokens.push({
+      id: randomUUID(),
+      token,
+    });
+  }
+
+  async recoveryPassword(userId: string, newPassword: string) {
+    const userById = this.items.find((item) => item.id === userId);
+
+    const newUser: User = {
+      id: userById?.id,
+      name: userById?.name as string,
+      email: userById?.email as string,
+      rules: userById?.rules as "user",
+      password_hash: newPassword,
+    };
+
+    this.items = [newUser];
+  }
 }

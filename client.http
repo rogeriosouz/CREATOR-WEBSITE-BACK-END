@@ -31,6 +31,15 @@ content-type: application/json
   "email": "rogerio@gmail.com"
 }
 
+### recovery-password
+POST http://localhost:3333/auth/recovery-password HTTP/1.1
+content-type: application/json
+
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyM2Q4NThjZC01ZWYzLTQ4MjQtODI5My04Y2Y0ZTU4NzkzMjkiLCJpYXQiOjE3MTg5MzI2NDIsImV4cCI6MTcxODkzNjI0Mn0.zuOCv9q9NanzvniWcF_osYwlfQKFEi--O_e7FZZb844",
+  "newPassword": "123456"
+}
+
 
 ### list projects
 GET http://localhost:3333/projects HTTP/1.1
