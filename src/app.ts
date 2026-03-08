@@ -17,7 +17,9 @@ app.register(fastifyCookie, {
   parseOptions: {},
 });
 
-app.setErrorHandler((error, _, reply) => {
+app.setErrorHandler((err, _, reply) => {
+  const error = err as unknown as any;
+
   if (error.name === "ZodError") {
     return reply.status(400).send({
       statusCode: 400,
