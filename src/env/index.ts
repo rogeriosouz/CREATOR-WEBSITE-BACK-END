@@ -5,6 +5,7 @@ const schemaEnv = z.object({
   DATABASE_URL: z.string().url(),
   NODE_ENV: z.enum(["dev", "test", "production"]).default("dev"),
   PORT: z.coerce.number().default(3333),
+  FRONT_END_URL: z.string().url(),
   SECRET_AUTH_USER: z.string(),
   USER_MAILTRAP: z.string(),
   PASS_MAILTRAP: z.string(),

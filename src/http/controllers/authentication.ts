@@ -29,12 +29,15 @@ export async function authentication(
       password,
     });
 
-    const cookie = `authUser=${token}; HttpOnly; Secure; SameSite=None; Path=/`;
-
     return reply
       .status(200)
-      .headers({
-        "set-cookie": cookie,
+      .setCookie("authUser", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+        path: "/",
+        maxAge: 60 * 60 * 24 * 6,
+        expires: new Date(expiredAt),
       })
       .send({
         user,
