@@ -9,6 +9,7 @@ const app = Fastify();
 
 app.register(cors, {
   origin: env.FRONT_END_URL,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   credentials: true,
 });
 
