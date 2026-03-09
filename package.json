@@ -7,7 +7,7 @@
   "scripts": {
     "setup": "tsx src/setup.ts",
     "build": "tsup src --out-dir build",
-    "deploy": "npm run build && pm2 delete back-end 2>/dev/null || pm2 start npm --name back-end -- run start:build && sudo systemctl restart nginx",
+    "deploy": "npm run build && pm2 start npm --name back-end -- run start:build && sudo systemctl restart nginx",
     "start:dev": "tsx watch src/server.ts",
     "start:build": "node build/server.js",
     "lint": "eslint --fix --ext .ts .",

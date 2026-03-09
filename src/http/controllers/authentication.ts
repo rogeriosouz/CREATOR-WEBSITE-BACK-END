@@ -33,11 +33,10 @@ export async function authentication(
       .status(200)
       .setCookie("authUser", token, {
         httpOnly: true,
-        secure: true,
-        sameSite: "none",
+        secure: false,
+        sameSite: "lax",
         path: "/",
         maxAge: 60 * 60 * 24 * 6,
-        expires: new Date(expiredAt),
       })
       .send({
         user,
